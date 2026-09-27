@@ -23,6 +23,11 @@ void pause()
 	clear();
 }
 
+void battlePause()
+{
+	this_thread::sleep_for(chrono::seconds(1));
+}
+
 void space()
 {
 	cout << endl;

@@ -3,5 +3,5 @@
     <Platform Name="x64" />
     <Platform Name="x86" />
   </Configurations>
-  <Project Path="Character Editor/Character Editor.vcxproj" />
+  <Project Path="Character Editor/Character Editor.vcxproj" Id="2cd020dd-556a-4cf6-934e-901a924a1fdb" />
 </Solution>
