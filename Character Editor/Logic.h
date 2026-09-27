@@ -183,7 +183,7 @@ int returnWeaponIndex(vector<Weapon>& weapons, string name)
 {
 	for (size_t i = 0; i < weapons.size(); i++)
 	{
-		if (weapons[i].name == name)
+		if (weapons[i].name.find(name) != string::npos)
 		{
 			return i;
 		}
@@ -205,10 +205,8 @@ void searchWeapon(vector<Weapon>& weapons, Player& player)
 		getKey();
 
 		int result = returnWeaponIndex(weapons, name);
-		if (result == -1)
-		{
-			player.equippedWeapon = 3;
-		}
+		if (result != -1) int result = returnWeaponIndex(weapons, name);
+		else player.equippedWeapon = 3;
 	}
 
 	else
@@ -231,10 +229,12 @@ void playerAttack(Player& player, Bot& bot, vector<Weapon>& weapons)
 	const int healthSnapshot = bot.health;
 	bot.health -= weapons[player.equippedWeapon].damage;
 
+	if (bot.health <= 0) bot.health = 0;
+
 	cout << "===== Shooting Range =====" << endl;
 	space();
 
-	cout << player.name << " Strikes with " << weapons[player.equippedWeapon].name << " -> " << bot.name << ": " << healthSnapshot << " -> " << bot.health << endl;
+	cout << player.name << " Strikes with " << weapons[player.equippedWeapon].name << " -> " << bot.name << ": " << healthSnapshot << " -> " << bot.health << " (" << red << "-" << weapons[player.equippedWeapon].damage << reset << ")" << endl;
 	getKey();
 }
 
@@ -358,7 +358,7 @@ void shootingRange(Player& player, Bot& bot,vector<Weapon>& weapons)
 				clear();
 				bot.health = 1000;
 
-				cout << "[+] " << bot.name << " is Dead!" << endl;
+				cout << "[+] " << bot.name << " is " << red << "Dead!" << reset << endl;
 				getKey();
 				return;
 			}
